@@ -1,1 +1,1 @@
-# pddl2semigroup
+# semigroups4planning
