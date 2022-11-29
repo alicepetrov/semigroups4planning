@@ -7,7 +7,7 @@ class Transformation():
         self,
         name,
         transformation
-        ):
+    ):
         self._name = name
         self._transformation = transformation
         self._kernel = self.get_kernel(transformation)
@@ -30,7 +30,7 @@ class TransformationSemigroup():
     def __init__(
         self, 
         generators
-        ):
+    ):
         self._generators = generators
 
 

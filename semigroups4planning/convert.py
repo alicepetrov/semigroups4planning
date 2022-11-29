@@ -5,7 +5,7 @@ Functions for converting PDDL to Semigroups
 from macq.generate.pddl import StateEnumerator
 import networkx as nx
 import numpy as np
-from semigroups import TransformationSemigroup
+from .semigroups import TransformationSemigroup
 
 
 def generate_state_space(
@@ -52,7 +52,6 @@ def generate_state_space(
 
 def digraph_to_transformations(
     digraph: nx.graph, 
-    actions: list(str), 
     add_sink: bool = True, 
     add_identity: bool = True
     ):
@@ -60,31 +59,39 @@ def digraph_to_transformations(
 
     Keyword arguments:
     digraph -- networkX graph encoding state space
-    actions -- list of actions
     add sink -- use a sink state?
     add identity -- add an identity transformation?
     """
-    # Add an identity transformation
-    if add_identity: actions.append("identity")
-    # Create index to keep track of actions in np array
-    action_index = {k: v for v, k in enumerate(actions)}
-    # Get number of actions
-    num_actions = len(actions)
-
     # Set up states
     num_states = digraph.number_of_nodes()
 
     if add_sink:
         # Send every state to the sink
-        transformations = np.full((num_actions, num_states+1), num_states+1)
+        # i.e if num_states = 5, then [6, 6,...,6]
+        num_states += 1
+        init_transformation = np.full(num_states, num_states-1)
     else:
         # Send every state to itself
-        identity = np.arange(num_states)
-        transformations = np.tile(identity,(num_actions,1))
+        # i.e [1, 2,...,n]
+        init_transformation = np.arange(num_states)
 
-    # TODO Iterate through graph and update transformations
+    # Initialize dictionary to store transformations
+    actions = {}
 
-    # TODO Convert transformations to Transformation objects
+    # Add an identity transformation
+    if add_identity: actions["identity"] = np.arange(num_states)
+
+    # Iterate through graph and update transformations
+    for u, v, act in digraph.edges(data=True):
+        label = act['label']
+
+        # Add new action if necessary
+        if label not in actions:
+            actions[label] = init_transformation.copy()
+
+        actions[label][u] = v
+
+    return actions
 
 
 def pddl_to_semigroup(
@@ -107,9 +114,6 @@ def pddl_to_semigroup(
     add sink -- use a sink state?
     add identity -- add an identity transformation?
     """
-    # Read PDDL
-    actions = [] # TODO
-
     # Get entire state space as networkx graph
     state_space = generate_state_space( 
         domain, 
@@ -120,7 +124,7 @@ def pddl_to_semigroup(
         ) # TODO kwargs?
 
     # Extract transformations from graph
-    generators = digraph_to_transformations(state_space, actions, add_sink, add_identity)
+    generators = digraph_to_transformations(state_space, add_sink, add_identity)
 
     # Generate corresponding semigroup
     semigroup = TransformationSemigroup(generators)

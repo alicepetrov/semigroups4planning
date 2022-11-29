@@ -4,12 +4,23 @@ import logging
 import sys
 from .__version__ import __version__
 
+MESSAGE = """
+                                                                             
+█▀ █▀▀ █▀▄▀█ █ █▀▀ █▀█ █▀█ █░█ █▀█ █▀ ▄▄ █░█ ▄▄ █▀█ █░░ ▄▀█ █▄░█ █▄░█ █ █▄░█ █▀▀
+▄█ ██▄ █░▀░█ █ █▄█ █▀▄ █▄█ █▄█ █▀▀ ▄█ ░░ ▀▀█ ░░ █▀▀ █▄▄ █▀█ █░▀█ █░▀█ █ █░▀█ █▄█
+"""
+
 class S4PParser(object):
     """
     """
     def __init__(self):
-        self._parser = ArgumentParser(prog="semigroups4planning")
+        
+        print(MESSAGE)
 
+        self._parser = ArgumentParser(
+            prog="semigroups4planning"
+        )
+        
         self._supported_inputs = [
             "pddl",
         ]
@@ -36,11 +47,7 @@ class S4PParser(object):
         )
 
 
-    def error(self):
-        print(
-        """                                                                                               
-        """
-        )
+    def error(self): # TODO
         print("Semigroups4Planning v" + __version__)
         self._parser.print_help()
         sys.exit(0)
