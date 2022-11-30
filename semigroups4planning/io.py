@@ -55,9 +55,3 @@ def read_problem(reader: PDDLReader, problem_id: int = None, problem: str = None
     else:
         prob = requests.get(planning_domains_api.get_problem(problem_id)["problem_url"]).text
         return reader.parse_instance_string(prob)
-
-
-def save_image(): # TODO
-    """
-    """
-    pass

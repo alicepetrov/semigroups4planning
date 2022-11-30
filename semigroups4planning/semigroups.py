@@ -1,38 +1,22 @@
 """
 """
-# TODO datatypes
-
-class Transformation():
-    def __init__(
-        self,
-        name,
-        transformation
-    ):
-        self._name = name
-        self._transformation = transformation
-        self._kernel = self.get_kernel(transformation)
-        self._image = self.get_image(transformation)
-
-
-    def get_kernel(): # TODO
-        pass
-
-    def get_image(): # TODO
-        pass
-
-    def get_rank(): # TODO (Should this be an attribute?)
-        pass
-
 
 class TransformationSemigroup():
     """
     """
     def __init__(
-        self, 
-        generators
+        self,
+        actions
     ):
-        self._generators = generators
+        self._actions = actions
+        self._generators = [v for v in actions.values()]
 
 
-    def build(self): # TODO
+    def get_transformation_kernel(): # TODO
+        pass
+
+    def get_transformation_image(): # TODO
+        pass
+
+    def get_transformation_rank(): # TODO
         pass

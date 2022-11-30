@@ -1,6 +1,7 @@
 """
 """
 from .arg_parser import S4PParser
+from .gap import GAP
 import logging
 
 
@@ -20,22 +21,27 @@ def main(): # TODO
     # -------------------------------------------------------------------------
     # TODO Remove after testing
 
-    # python -m semigroups4planning -h
+    # python -m semigroups4planning
 
     from .convert import pddl_to_semigroup
 
     domain = "C:/Users/Alice/source/repos/semigroups4planning/semigroups4planning/domain.pddl"
     problem = "C:/Users/Alice/source/repos/semigroups4planning/semigroups4planning/problem.pddl"
 
-    pddl_to_semigroup(
+    test_sg = pddl_to_semigroup(
         domain, 
         problem,
         relabel = True, 
-        start_action = False,
-        end_action = False,
-        add_sink = True,
+        add_sink = False,
         add_identity = True
         )
+
+    from .gap import GAP
+
+    gap = GAP("folder", "packages")
+
+    gap.create_transformation_semigroup(test_sg._generators)
+
     # -------------------------------------------------------------------------
 
 

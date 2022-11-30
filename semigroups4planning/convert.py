@@ -12,8 +12,8 @@ def generate_state_space(
     domain: str, 
     problem: str, 
     relabel: bool = True, 
-    start_action: bool = True,
-    end_action: bool = True
+    start_state: int = None,
+    goal_state: int = None
     ):
     """Generates the entire state space of a PDDL problem and domain
 
@@ -21,8 +21,8 @@ def generate_state_space(
     domain -- domain .pddl file 
     problem -- problem .pddl file
     relabel -- relabel the states with numbers?
-    start_action -- add a dummy start action to our initial state?
-    end_action -- add a dummy end ection to our goal state?
+    start_state -- add a dummy start state to our graph
+    goal_state -- add a dummy goal state to our graph
 
     Returns:
     state_graph -- networkx graph
@@ -32,12 +32,12 @@ def generate_state_space(
     # Get networkx graph
     graph = generator.graph
 
-    # Optionally add start transition
-    if start_action:
+    # Optionally add start state
+    if start_state:
         pass # TODO
 
-    # Optionally add end transition
-    if end_action:
+    # Optionally add end state
+    if goal_state:
         pass # TODO
 
     if relabel:
@@ -98,8 +98,8 @@ def pddl_to_semigroup(
     domain: str, 
     problem: str,
     relabel: bool = True, 
-    start_action: bool = True,
-    end_action: bool = True,
+    start_state: int = None,
+    goal_state: int = None,
     add_sink: bool = True,
     add_identity: bool = True
     ):
@@ -109,8 +109,8 @@ def pddl_to_semigroup(
     domain -- domain .pddl file 
     problem -- problem .pddl file
     relabel -- relabel the states with numbers?
-    start_action -- add a dummy start action to our initial state?
-    end_action -- add a dummy end ection to our goal state?
+    start_state -- add a dummy start state to our graph
+    goal_state -- add a dummy goal state to our graph
     add sink -- use a sink state?
     add identity -- add an identity transformation?
     """
@@ -119,12 +119,15 @@ def pddl_to_semigroup(
         domain, 
         problem, 
         relabel, 
-        start_action, 
-        end_action
-        ) # TODO kwargs?
-
+        start_state, 
+        goal_state
+        )
     # Extract transformations from graph
-    generators = digraph_to_transformations(state_space, add_sink, add_identity)
+    transformations = digraph_to_transformations(state_space, add_sink, add_identity)
 
+    # We generally like to index at 0, but GAP indexes starting at 1 :(
+    for k , v in transformations.items(): transformations[k] = v + 1
     # Generate corresponding semigroup
-    semigroup = TransformationSemigroup(generators)
+    semigroup = TransformationSemigroup(transformations)
+
+    return semigroup
