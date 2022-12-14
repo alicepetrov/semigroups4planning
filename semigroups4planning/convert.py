@@ -2,14 +2,11 @@
 Functions for converting PDDL to Semigroups
 """
 # Imports
-from copy import deepcopy
 import networkx as nx
 import numpy as np
 from macq.generate.pddl import StateEnumerator
 
 from .semigroup import TransformationSemigroup
-
-
 
 
 def generate_state_space(
