@@ -28,6 +28,6 @@ class GAP():
         template = self._environment.get_template("transformation_semigroup.txt")
         content = template.render(var = var, generators = transformations)
 
-        with open("test.txt", mode="w", encoding="utf-8") as message: # TODO remove after testing
-            message.write(content)
+        # with open("test.txt", mode="w", encoding="utf-8") as message: # TODO remove after testing
+        #     message.write(content)
         

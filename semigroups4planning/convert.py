@@ -2,10 +2,14 @@
 Functions for converting PDDL to Semigroups
 """
 # Imports
-from macq.generate.pddl import StateEnumerator
+from copy import deepcopy
 import networkx as nx
 import numpy as np
-from .semigroups import TransformationSemigroup
+from macq.generate.pddl import StateEnumerator
+
+from .semigroup import TransformationSemigroup
+
+
 
 
 def generate_state_space(
@@ -32,20 +36,44 @@ def generate_state_space(
     # Get networkx graph
     graph = generator.graph
 
-    # Optionally add start state
+    # Identify start state
     if start_state:
-        pass # TODO
+        init_state = generator.problem.init
+        graph.nodes[init_state]["name"] = "initial_state"
 
-    # Optionally add end state
+        # Add dummy transition
+        graph.add_node(0, name="start")
+        graph.add_edge(0, init_state, label="start_transition")
+
+    # Identify goal state(s)
     if goal_state:
-        pass # TODO
+        goal = generator.problem.goal     
 
     if relabel:
-        # Get states
-        states = list(graph.nodes())
+        
+        if goal_state:              
+            # Counter to track number of states matching goal
+            n = 1
+            num_states = graph.number_of_nodes()
+            # Identify states matching goal
+            for state in list(graph):
+                if not type(state) == int and state[goal]:
+                    # Relabel
+                    graph.nodes[state]["name"] = "goal"
+                    graph.nodes[state]["goal_number"] = n
+
+                    # Add dummy transition
+                    graph.add_node(num_states, name="end")
+                    graph.add_edge(state, num_states, label="end_transition")
+
+                    # Increment counters
+                    num_states += 1
+                    n += 1
+
         # Relabel the states with numbers
+        states = graph.nodes()
         state_mapping = dict(zip(states, range(len(states))))
-        graph = nx.relabel_nodes(graph, state_mapping)
+        graph = nx.relabel_nodes(graph, state_mapping, copy=False)
 
     return graph
 
@@ -98,8 +126,8 @@ def pddl_to_semigroup(
     domain: str, 
     problem: str,
     relabel: bool = True, 
-    start_state: int = None,
-    goal_state: int = None,
+    start_state: bool = True,
+    goal_state: bool = True,
     add_sink: bool = True,
     add_identity: bool = True
     ):
@@ -125,7 +153,7 @@ def pddl_to_semigroup(
     # Extract transformations from graph
     transformations = digraph_to_transformations(state_space, add_sink, add_identity)
 
-    # We generally like to index at 0, but GAP indexes starting at 1 :(
+    # GAP indexes starting at 1
     for k , v in transformations.items(): transformations[k] = v + 1
     # Generate corresponding semigroup
     semigroup = TransformationSemigroup(transformations)

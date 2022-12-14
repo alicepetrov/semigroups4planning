@@ -1,7 +1,6 @@
 """
 """
 from .arg_parser import S4PParser
-from .gap import GAP
 import logging
 
 
