@@ -1,1 +1,0 @@
-{{ var }} :=  Semigroup( [ {% for array in generators %} Transformation ({{ array }}), {% endfor %} ] );
