@@ -1,0 +1,13 @@
+LogTo("basic_attributes.txt");
+
+{% include 'functions/transformation_semigroup.txt' %}
+
+{% include 'functions/size.txt' %}
+
+{% include 'functions/is_enumerable.txt' %}
+
+{% include 'functions/generators.txt' %}
+
+{% include 'functions/digraph_actions_on_points.txt' %}
+
+Print(DotDigraph(digraph_actions_on_points)); # TODO printo file directly

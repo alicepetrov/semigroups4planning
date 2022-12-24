@@ -1,0 +1,7 @@
+LogTo("cayley_graphs.txt");
+
+{% include 'functions/transformation_semigroup.txt' %}
+
+{% include 'functions/right_cayley_graph.txt' %}
+
+Print(DotForDrawingRightCayleyGraph( {{ transformation_semigroup }} ));
