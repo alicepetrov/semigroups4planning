@@ -1,0 +1,6 @@
+cd GAP_HOME
+
+./bin/gap.sh
+
+Read( {{ file }} );
+
