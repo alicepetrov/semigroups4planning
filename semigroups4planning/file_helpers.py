@@ -1,11 +1,14 @@
 """
 Helper functions for reading and writing files
 """
-# Imports
-from macq.generate.pddl import planning_domains_api
-from tarski.io import PDDLReader
-import requests
 import os
+from io import BytesIO
+
+import networkx as nx
+import requests
+from macq.generate.pddl import planning_domains_api
+from PIL import Image
+from tarski.io import PDDLReader
 
 
 def safe_open_w(path: str):
@@ -16,6 +19,17 @@ def safe_open_w(path: str):
     """
     os.makedirs(os.path.dirname(path), exist_ok=True)
     return open(path, 'w')
+
+
+def save_dot_as_img(dot_file: str):
+    """Save a DOT graph file as a JPG
+
+    Keyword arguments:
+        dot_file -- location of file
+    """
+    dot_graph = nx.nx_pydot.read_dot(dot_file)
+    img = Image.open(BytesIO(dot_graph.create_png())).convert('RGB')
+    img.save('state_space.jpg')
 
 
 def read_pddl(problem_id: int = None, problem: str = None, domain: str = None):

@@ -1,8 +1,9 @@
 """
 Command Line Interface
 """
-from .arg_parser import S4PParser
 import logging
+
+from .arg_parser import S4PParser
 
 
 # Set up parser and arguments
@@ -40,7 +41,7 @@ def main(): # TODO
 
     gap = GAP() # TODO
 
-    gap.create_transformation_semigroup(test_sg)
+    gap.get_basic_attributes(test_sg)
 
     # -------------------------------------------------------------------------
 

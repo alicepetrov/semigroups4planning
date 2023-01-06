@@ -1,7 +1,6 @@
 """
 Functions for converting PDDL to Semigroups
 """
-# Imports
 import networkx as nx
 import numpy as np
 from macq.generate.pddl import StateEnumerator

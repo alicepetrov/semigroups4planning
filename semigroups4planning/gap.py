@@ -1,11 +1,13 @@
 """
 GAP class for building and executing scripts
 """
-from .io import safe_open_w
-from jinja2 import Environment, FileSystemLoader
 import os
 
+from jinja2 import Environment, FileSystemLoader
+
 from . import HERE
+from .file_helpers import safe_open_w, save_dot_as_img
+
 
 class GAP():
     """
@@ -86,7 +88,5 @@ class GAP():
         # Execute as bash script
         self.execute_script(filename)
 
-        # TODO read dot graph and generate networkX graph
-
-        # TODO Delete file?
-        
+        # Save DOT as image
+        save_dot_as_img("dot_drawing_actions_on_points.dot")

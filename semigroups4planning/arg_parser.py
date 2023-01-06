@@ -1,11 +1,12 @@
 """
 Argument parser for CLI tool
 """
-# Imports
-from argparse import ArgumentParser
 import logging
 import sys
+from argparse import ArgumentParser
+
 from .__version__ import __version__
+
 
 MESSAGE = """
                                                                              
