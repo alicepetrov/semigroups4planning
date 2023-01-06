@@ -1,9 +1,21 @@
 """
+Helper functions for reading and writing files
 """
 # Imports
 from macq.generate.pddl import planning_domains_api
 from tarski.io import PDDLReader
 import requests
+import os
+
+
+def safe_open_w(path: str):
+    """Open "path" for writing, creating any parent directories as needed.
+
+    Keyword arguments:
+        path -- location of file
+    """
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    return open(path, 'w')
 
 
 def read_pddl(problem_id: int = None, problem: str = None, domain: str = None):

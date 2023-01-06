@@ -1,5 +1,7 @@
 """
 """
+import numpy as np
+import sys
 
 class TransformationSemigroup():
     """
@@ -10,7 +12,7 @@ class TransformationSemigroup():
     ):
         self._actions = actions
         self._generators = [v for v in actions.values()]
-
+        self._generators_as_string = [np.array2string(v, separator=', ', max_line_width=sys.maxsize) for v in self._generators]
 
     def get_transformation_kernel(): # TODO
         pass

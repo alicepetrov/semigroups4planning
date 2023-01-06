@@ -1,4 +1,5 @@
 """
+Visualization functions
 """
 # Imports
 

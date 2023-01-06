@@ -1,9 +1,9 @@
 """
+GAP class for building and executing scripts
 """
+from .io import safe_open_w
 from jinja2 import Environment, FileSystemLoader
 import os
-import sys
-import numpy as np
 
 from . import HERE
 
@@ -11,33 +11,82 @@ class GAP():
     """
     """
     def __init__(
-        self,
-        folder,
-        packages
+        self
     ):
-        self._folder = folder
-        self._packages = packages
         self._environment = Environment(loader=FileSystemLoader(os.path.join(HERE, "templates/")))
 
+
+    def execute_script(self, filename: str):
+        """Execute a GAP file as a bash script
+
+        Keyword arguments:
+            filename -- GAP file to read
+        """
+        # Generate bash script
+        template = self._environment.get_template("execute_gap_script.txt")
+        content = template.render(file = filename)
+
+        # Execute bash script
+        os.system(content)
     
-    def create_transformation_semigroup(self, generators, transformation_semigroup: str = "S"):
+    
+    def create_transformation_semigroup(self, semigroup):
+        """Template to declare a transformation semigroup
+
+        Keyword arguments:
+            semigroup -- TransformationSemigroup object
         """
-        """
-        transformations = [np.array2string(v, separator=', ', max_line_width=sys.maxsize) for v in generators]
-        
+        # Generate GAP script
         template = self._environment.get_template("functions/transformation_semigroup.txt")
-        content = template.render(transformation_semigroup = transformation_semigroup, generators = transformations)
+        content = template.render(generators = semigroup._generators_as_string)
 
-        # TODO call GAP with content
+        # Save GAP script
+        filename = "gap_scripts/create_transformation_semigroup.g"
+        with safe_open_w(filename) as f:
+            f.write(content)
 
-        # with open("test.txt", mode="w", encoding="utf-8") as message: # TODO remove after testing
-        #     message.write(content)
+        # Execute as bash script
+        self.execute_script(filename)
 
-    def get_basic_attributes(self, generators, transformation_semigroup: str = "S"):
+    
+    def get_size(self, semigroup):
+        """Template to get size of a transformation semigroup
+
+        Keyword arguments:
+            semigroup -- TransformationSemigroup object
         """
+        # Generate GAP script
+        template = self._environment.get_template("get_size.txt")
+        content = template.render(generators = semigroup._generators_as_string)
+
+        # Save GAP script
+        filename = "gap_scripts/get_size.g"
+        with safe_open_w(filename) as f:
+            f.write(content)
+
+        # Execute as bash script
+        self.execute_script(filename)
+
+
+    def get_basic_attributes(self, semigroup):
+        """Template to get basic properties, digraph, etc of a transformation semigroup
+
+        Keyword arguments:
+            semigroup -- TransformationSemigroup object
         """
-        transformations = [np.array2string(v, separator=', ', max_line_width=sys.maxsize) for v in generators]
-        
+        # Generate GAP script
         template = self._environment.get_template("basic_attributes.txt")
-        content = template.render(transformation_semigroup = transformation_semigroup, generators = transformations)
+        content = template.render(generators = semigroup._generators_as_string)
+
+        # Save GAP script
+        filename = "gap_scripts/get_basic_attributes.g"
+        with safe_open_w(filename) as f:
+            f.write(content)
+
+        # Execute as bash script
+        self.execute_script(filename)
+
+        # TODO read dot graph and generate networkX graph
+
+        # TODO Delete file?
         

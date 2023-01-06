@@ -1,1 +1,1 @@
-{{ size }} := Size( {{ transformation_semigroup }} ) ;
+size := Size( transformation_semigroup );

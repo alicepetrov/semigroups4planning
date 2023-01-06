@@ -1,1 +1,1 @@
-{{ generators }} := GeneratorsOfSemigroup( {{ transformation_semigroup }} );
+semigroup_generators := GeneratorsOfSemigroup( transformation_semigroup );

@@ -1,8 +1,6 @@
-LogTo("basic_attributes.txt");
+LogTo("basic_attributes.log");
 
 {% include 'functions/transformation_semigroup.txt' %}
-
-{% include 'functions/size.txt' %}
 
 {% include 'functions/is_enumerable.txt' %}
 
@@ -10,4 +8,4 @@ LogTo("basic_attributes.txt");
 
 {% include 'functions/digraph_actions_on_points.txt' %}
 
-Print(DotDigraph(digraph_actions_on_points)); # TODO printo file directly
+PrintTo( "dot_drawing_actions_on_points.dot", DotDigraph( digraph_actions_on_points ) );

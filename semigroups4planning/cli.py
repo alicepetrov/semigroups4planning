@@ -1,4 +1,5 @@
 """
+Command Line Interface
 """
 from .arg_parser import S4PParser
 import logging
@@ -37,9 +38,9 @@ def main(): # TODO
 
     from .gap import GAP
 
-    gap = GAP("folder", "packages")
+    gap = GAP() # TODO
 
-    gap.create_transformation_semigroup(test_sg._generators)
+    gap.create_transformation_semigroup(test_sg)
 
     # -------------------------------------------------------------------------
 

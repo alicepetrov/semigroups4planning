@@ -1,3 +1,6 @@
+"""
+Argument parser for CLI tool
+"""
 # Imports
 from argparse import ArgumentParser
 import logging

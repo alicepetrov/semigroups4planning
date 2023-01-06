@@ -1,1 +1,1 @@
-{{ right_cayley_graph }} := RightCayleyDigraph( {{ transformation_semigroup }}  );
+right_cayley_graph := RightCayleyDigraph( transformation_semigroup );

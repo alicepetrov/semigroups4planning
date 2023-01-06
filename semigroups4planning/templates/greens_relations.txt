@@ -1,0 +1,1 @@
+LogTo("greens_relations.log");
