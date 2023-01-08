@@ -90,3 +90,26 @@ class GAP():
 
         # Save DOT as image
         save_dot_as_img("dot_drawing_actions_on_points.dot")
+
+    
+    def get_greens_relations(self, semigroup):
+        """Template to get Green's Classes of a transformation semigroup
+
+        Keyword arguments:
+            semigroup -- TransformationSemigroup object
+        """
+        # Generate GAP script
+        template = self._environment.get_template("greens_relations.txt")
+        content = template.render(generators = semigroup._generators_as_string)
+
+        # Save GAP script
+        filename = "gap_scripts/get_greens_relations.g"
+        with safe_open_w(filename) as f:
+            f.write(content)
+
+        # Execute as bash script
+        self.execute_script(filename)
+
+        # Save DOT as image
+        save_dot_as_img("dot_for_drawing_d_classes.dot")
+  

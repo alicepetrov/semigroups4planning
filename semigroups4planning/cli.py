@@ -41,7 +41,7 @@ def main(): # TODO
 
     gap = GAP() # TODO
 
-    gap.get_basic_attributes(test_sg)
+    gap.get_greens_relations(test_sg)
 
     # -------------------------------------------------------------------------
 
