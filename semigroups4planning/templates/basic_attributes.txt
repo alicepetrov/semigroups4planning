@@ -2,7 +2,6 @@ LogTo("basic_attributes.log");
 
 LoadPackage("Digraph");
 LoadPackage("semigroups");
-LoadPackage("sgpviz");
 
 {% include 'functions/transformation_semigroup.txt' %}
 
