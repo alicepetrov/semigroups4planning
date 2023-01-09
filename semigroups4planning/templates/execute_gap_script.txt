@@ -1,13 +1,1 @@
-cd GAP_HOME
-
-./bin/gap.sh
-
-LoadPackage("automata");
-LoadPackage("Digraph");
-LoadPackage("semigroups");
-LoadPackage("semigroupviz");
-LoadPackage("sgpviz");
-LoadPackage("SgpDec");
-
-Read( {{ file }} );
-
+cat {{ file }} | gap

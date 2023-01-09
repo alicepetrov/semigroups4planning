@@ -1,11 +1,13 @@
 
 FROM aiplanning/planutils:latest
 
+LABEL maintainer="Alice Petrov (17ap87@queensu.ca)"
+
 # Update the apt package manager
 RUN apt-get update
 
 # Install GAP
-RUN yes | apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev
+RUN yes | apt-get install build-essential autoconf libtool libgmp-dev libreadline-dev zlib1g-dev graphviz
 
 ENV GAP_VERSION 4.12.1
 
@@ -38,7 +40,6 @@ ENV PATH ${GAP_HOME}/bin:${PATH}
 
 # Install packages
 RUN yes | pip3 install networkx
-RUN yes | pip3 install graphviz
 RUN yes | pip3 install pydot
 RUN yes | pip3 install numpy
 RUN yes | pip3 install Jinja2
@@ -50,6 +51,6 @@ RUN yes | pip3 install -e .
 
 RUN export PYTHONIOENCODING=utf8
 
-WORKDIR /PROJECT
+COPY . /SEMIGROUPS4PLANNING
 
 CMD planutils activate

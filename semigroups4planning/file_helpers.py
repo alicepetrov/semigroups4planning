@@ -2,12 +2,10 @@
 Helper functions for reading and writing files
 """
 import os
-from io import BytesIO
 
-import networkx as nx
+import pydot
 import requests
 from macq.generate.pddl import planning_domains_api
-from PIL import Image
 from tarski.io import PDDLReader
 
 
@@ -27,9 +25,8 @@ def save_dot_as_img(dot_file: str):
     Keyword arguments:
         dot_file -- location of file
     """
-    dot_graph = nx.nx_pydot.read_dot(dot_file)
-    img = Image.open(BytesIO(dot_graph.create_png())).convert('RGB')
-    img.save('state_space.jpg')
+    (graph,) = pydot.graph_from_dot_file(dot_file)
+    graph.write_png(dot_file.replace(".dot", ".png"))
 
 
 def read_pddl(problem_id: int = None, problem: str = None, domain: str = None):

@@ -1,5 +1,7 @@
 LogTo("get_size.log");
 
+{% include 'functions/imports.txt' %}
+
 {% include 'functions/transformation_semigroup.txt' %}
 
 {% include 'functions/size.txt' %}

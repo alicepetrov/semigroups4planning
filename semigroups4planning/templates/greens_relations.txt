@@ -1,5 +1,7 @@
 LogTo("greens_relations.log");
 
+LoadPackage("semigroups");
+
 {% include 'functions/transformation_semigroup.txt' %}
 
 {% include 'functions/d_classes.txt' %}

@@ -26,8 +26,8 @@ def main(): # TODO
 
     from .convert import pddl_to_semigroup
 
-    domain = "C:/Users/Alice/source/repos/semigroups4planning/semigroups4planning/domain.pddl"
-    problem = "C:/Users/Alice/source/repos/semigroups4planning/semigroups4planning/problem.pddl"
+    domain = "domain.pddl"
+    problem = "problem.pddl"
 
     test_sg = pddl_to_semigroup(
         domain, 
@@ -41,7 +41,7 @@ def main(): # TODO
 
     gap = GAP() # TODO
 
-    gap.get_greens_relations(test_sg)
+    gap.get_basic_attributes(test_sg)
 
     # -------------------------------------------------------------------------
 

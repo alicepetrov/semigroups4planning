@@ -1,5 +1,7 @@
 LogTo("right_cayley_graph.log");
 
+LoadPackage("semigroups");
+
 {% include 'functions/transformation_semigroup.txt' %}
 
 {% include 'functions/right_cayley_graph.txt' %}

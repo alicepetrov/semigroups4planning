@@ -1,11 +1,15 @@
 LogTo("basic_attributes.log");
 
-{% include 'functions/transformation_semigroup.txt' %}
+LoadPackage("Digraph");
+LoadPackage("semigroups");
+LoadPackage("sgpviz");
 
-{% include 'functions/is_enumerable.txt' %}
+{% include 'functions/transformation_semigroup.txt' %}
 
 {% include 'functions/generators.txt' %}
 
 {% include 'functions/digraph_actions_on_points.txt' %}
 
 PrintTo( "dot_drawing_actions_on_points.dot", DotDigraph( digraph_actions_on_points ) );
+
+quit;
