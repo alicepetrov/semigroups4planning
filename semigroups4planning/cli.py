@@ -26,14 +26,14 @@ def main(): # TODO
 
     from .convert import pddl_to_semigroup
 
-    domain = "domain.pddl"
-    problem = "problem.pddl"
+    domain = "examples/drive-mini/domain.pddl"
+    problem = "examples/drive-mini/problem.pddl"
 
     test_sg = pddl_to_semigroup(
         domain, 
         problem,
         relabel = True, 
-        add_sink = False,
+        add_sink = True,
         add_identity = True
         )
 
