@@ -1,12 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Note: To use the 'upload' functionality of this file, you must install Twine:
-#   $ pip install -r requirements.txt
-
-import io
 import os
-
 from setuptools import setup
 
 # Package meta-data.
@@ -20,7 +15,6 @@ LICENSE = 'MIT'
 REQUIRED = [
     'macq', 'numpy', 'networkx', 'jinja2', 'pydot', 'requests', 'tarski'
 ]
-
 
 version_ns = {}
 with open(os.path.join(HERE, 'semigroups4planning', '__version__.py')) as f:
