@@ -12,6 +12,6 @@ LoadPackage("sgpviz");
 
 PrintTo( "dot_drawing_actions_on_points.dot", DotDigraph( digraph_actions_on_points ) );
 
-PrintTo( "dot_for_drawing_d_classes.dot", Print(DotForDrawingDClasses( S ) ));
+PrintTo( "dot_for_drawing_d_classes.dot", DotForDrawingDClasses( S ) );
 
 quit;

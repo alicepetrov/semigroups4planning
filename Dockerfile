@@ -23,18 +23,6 @@ RUN mkdir -p /home/gap/inst/ \
     && cd pkg \
     && ../bin/BuildPackages.sh
 
-# Install and configure JupyterKernel for GAP
-RUN yes | pip3 install notebook
-RUN yes | pip3 install jupyterlab
-RUN git clone https://github.com/gap-packages/JupyterKernel.git /JupyterKernel \
-    && cd /JupyterKernel \
-    && pip3 install .
-
-RUN jupyter serverextension enable --py jupyterlab --user
-
-ENV PATH /home/gap/inst/gap-${GAP_VERSION}/pkg/JupyterKernel/bin:${PATH}
-ENV JUPYTER_GAP_EXECUTABLE /home/gap/inst/gap-${GAP_VERSION}/bin/gap.sh
-
 ENV GAP_HOME /home/gap/inst/gap-${GAP_VERSION}
 ENV PATH ${GAP_HOME}/bin:${PATH}
 

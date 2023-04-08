@@ -1,6 +1,13 @@
 # semigroups4planning
 
-The following library converts classical planning domains and problems into semigroups, and then runs GAP functions to analyze them
+The following library converts classical planning domains and problems into semigroups, and then runs GAP functions to analyze them.
+For best results, run from the provided Docker container.
+
+## Installation
+
+Navigate to root directory and run:
+> pip install -r requirements.txt
+> pip install .
 
 ## CLI Tool Usage
 
@@ -21,3 +28,5 @@ options:
   --goal_state, --no-goal_state     Add goal states to graph (default: True)
   --sink_state, --no-sink_state     Add sink state to graph (default: True)
   --identity, --no-identity         Add an identity transformation (default: True)
+
+  Note that GAP scripts are saved in the gap_scripts folder.
