@@ -1,1 +1,1 @@
-r_classes := GreensRClasses( transformation_semigroup );
+r_classes := GreensRClasses( S );

@@ -25,6 +25,16 @@ def save_dot_as_img(dot_file: str):
     Keyword arguments:
         dot_file -- location of file
     """
+    # Read DOT 
+    with open(dot_file, 'r') as f:
+        lines = f.readlines()
+    # Fix line breaks
+    with open(dot_file, 'w') as f:
+        for line in lines:
+            line = line.replace("\\\n", "")
+            f.write(line)
+
+    # Build and save graph
     (graph,) = pydot.graph_from_dot_file(dot_file)
     graph.write_png(dot_file.replace(".dot", ".png"))
 

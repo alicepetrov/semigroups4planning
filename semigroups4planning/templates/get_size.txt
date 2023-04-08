@@ -5,3 +5,5 @@ LoadPackage("semigroups");
 {% include 'functions/transformation_semigroup.txt' %}
 
 {% include 'functions/size.txt' %}
+
+quit;

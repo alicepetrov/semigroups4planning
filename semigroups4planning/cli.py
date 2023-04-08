@@ -4,47 +4,32 @@ Command Line Interface
 import logging
 
 from .arg_parser import S4PParser
-
+from .convert import pddl_to_semigroup
 
 # Set up parser and arguments
 PARSER = S4PParser()
 ARGS = PARSER.parse_arguments()
 
-
-# Set up logging, # TODO Set up colours            
+# Set up logging           
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(ARGS.loglevel)
 
-
-def main(): # TODO
+def main():
     """
     """
-    # -------------------------------------------------------------------------
-    # TODO Remove after testing
-
-    # python -m semigroups4planning
-
-    from .convert import pddl_to_semigroup
-
-    domain = "examples/drive-mini/domain.pddl"
-    problem = "examples/drive-mini/problem.pddl"
-
-    test_sg = pddl_to_semigroup(
-        domain, 
-        problem,
-        relabel = True, 
-        add_sink = True,
-        add_identity = True
+    semigroup = pddl_to_semigroup(
+        ARGS.domain, 
+        ARGS.problem,
+        relabel = ARGS.relabel, 
+        start_state = ARGS.start_state, 
+        goal_state = ARGS.goal_state, 
+        add_sink = ARGS.sink_state,
+        add_identity = ARGS.identity
         )
 
-    from .gap import GAP
-
-    gap = GAP() # TODO
-
-    gap.get_basic_attributes(test_sg)
-
-    # -------------------------------------------------------------------------
-
+    # Identify which script to run
+    func = PARSER._functions[ARGS.command]
+    func(semigroup)
 
 if __name__ == '__main__':
     main()

@@ -1,1 +1,1 @@
-length_longest_d_chain = LengthOfLongestDClassChain( transformation_semigroup );
+length_longest_d_chain := LengthOfLongestDClassChain( S );

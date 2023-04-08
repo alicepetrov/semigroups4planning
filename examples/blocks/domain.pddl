@@ -4,17 +4,18 @@
 
 (define (domain BLOCKS)
   (:requirements :strips :typing)
-  (:types block)
+  (:types block light)
   (:predicates (on ?x - block ?y - block)
 	       (ontable ?x - block)
 	       (clear ?x - block)
 	       (handempty)
 	       (holding ?x - block)
+		   (light-on ?l - light)
 	       )
 
   (:action pick-up
-	     :parameters (?x - block)
-	     :precondition (and (clear ?x) (ontable ?x) (handempty))
+	     :parameters (?x - block ?l - light)
+	     :precondition (and (clear ?x) (ontable ?x) (handempty) (light-on ?l))
 	     :effect
 	     (and (not (ontable ?x))
 		   (not (clear ?x))
@@ -48,4 +49,14 @@
 		   (clear ?y)
 		   (not (clear ?x))
 		   (not (handempty))
-		   (not (on ?x ?y)))))
+		   (not (on ?x ?y))))
+
+	(:action turn-on-light
+       :parameters  (?light - light)
+       :precondition  (not (light-on ?light))
+       :effect (and (light-on ?light)))
+       
+    (:action turn-off-light
+       :parameters  (?light - light)
+       :precondition  (light-on ?light)
+       :effect (and (not (light-on ?light)))))

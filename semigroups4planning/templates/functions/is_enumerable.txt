@@ -1,1 +1,1 @@
-is_enumerable := IsEnumerableSemigroupRep( transformation_semigroup );
+is_enumerable := IsEnumerableSemigroupRep( S );

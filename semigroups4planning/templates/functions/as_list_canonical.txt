@@ -1,1 +1,1 @@
-as_list_canonical := AsListCanonical( transformation_semigroup );
+as_list_canonical := AsListCanonical( S );

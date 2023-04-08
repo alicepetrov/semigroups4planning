@@ -20,9 +20,6 @@ class GAP():
 
     def execute_script(self, filename: str):
         """Execute a GAP file as a bash script
-
-        Keyword arguments:
-            filename -- GAP file to read
         """
         # Generate bash script
         template = self._environment.get_template("execute_gap_script.txt")
@@ -30,6 +27,18 @@ class GAP():
 
         # Execute bash script
         os.system(content)
+
+
+    def generate_script(self, semigroup, template_file: str, filename):
+        """Write to GAP script
+        """
+        # Generate GAP script
+        template = self._environment.get_template(template_file)
+        content = template.render(generators = semigroup._generators_as_string)
+
+        # Save GAP script
+        with safe_open_w(filename) as f:
+            f.write(content)
     
     
     def create_transformation_semigroup(self, semigroup):
@@ -38,15 +47,12 @@ class GAP():
         Keyword arguments:
             semigroup -- TransformationSemigroup object
         """
-        # Generate GAP script
-        template = self._environment.get_template("functions/transformation_semigroup.txt")
-        content = template.render(generators = semigroup._generators_as_string)
-
-        # Save GAP script
+        # File names
+        template_file = "functions/transformation_semigroup.txt"
         filename = "gap_scripts/create_transformation_semigroup.g"
-        with safe_open_w(filename) as f:
-            f.write(content)
 
+        # Setup script
+        self.generate__script(semigroup, template_file, filename)
         # Execute as bash script
         self.execute_script(filename)
 
@@ -57,15 +63,12 @@ class GAP():
         Keyword arguments:
             semigroup -- TransformationSemigroup object
         """
-        # Generate GAP script
-        template = self._environment.get_template("get_size.txt")
-        content = template.render(generators = semigroup._generators_as_string)
-
-        # Save GAP script
+        # File names
+        template_file = "get_size.txt"
         filename = "gap_scripts/get_size.g"
-        with safe_open_w(filename) as f:
-            f.write(content)
 
+        # Generate_ script
+        self.generate_script(semigroup, template_file, filename)
         # Execute as bash script
         self.execute_script(filename)
 
@@ -76,20 +79,20 @@ class GAP():
         Keyword arguments:
             semigroup -- TransformationSemigroup object
         """
-        # Generate GAP script
-        template = self._environment.get_template("basic_attributes.txt")
-        content = template.render(generators = semigroup._generators_as_string)
-
-        # Save GAP script
+        # File names
+        template_file = "basic_attributes.txt"
         filename = "gap_scripts/get_basic_attributes.g"
-        with safe_open_w(filename) as f:
-            f.write(content)
 
+        # Generate_ script
+        self.generate_script(semigroup, template_file, filename)
         # Execute as bash script
         self.execute_script(filename)
 
         # Save DOT as image
         save_dot_as_img("dot_drawing_actions_on_points.dot")
+
+        # Save DOT as image
+        save_dot_as_img("dot_for_drawing_d_classes.dot")
 
     
     def get_greens_relations(self, semigroup):
@@ -98,18 +101,56 @@ class GAP():
         Keyword arguments:
             semigroup -- TransformationSemigroup object
         """
-        # Generate GAP script
-        template = self._environment.get_template("greens_relations.txt")
-        content = template.render(generators = semigroup._generators_as_string)
-
-        # Save GAP script
+        # File names
+        template_file = "greens_relations.txt"
         filename = "gap_scripts/get_greens_relations.g"
-        with safe_open_w(filename) as f:
-            f.write(content)
 
+        # Generate_ script
+        self.generate_script(semigroup, template_file, filename)
         # Execute as bash script
         self.execute_script(filename)
 
         # Save DOT as image
         save_dot_as_img("dot_for_drawing_d_classes.dot")
+
+
+    def get_right_cayley_graph(self, semigroup):
+        """Template to get Right Cayley Graph of a transformation semigroup
+
+        Keyword arguments:
+            semigroup -- TransformationSemigroup object
+        """
+        # File names
+        template_file = "right_cayley_graph.txt"
+        filename = "gap_scripts/get_right_cayley_graph.g"
+
+        # Generate_ script
+        self.generate_script(semigroup, template_file, filename)
+        # Execute as bash script
+        self.execute_script(filename)
+
+        # Save DOT as image
+        save_dot_as_img("dot_drawing_right_cayley_graph.dot")
+
+        # Save DOT as image
+        save_dot_as_img("dot_drawing_right_cayley_automaton.dot")
+
+
+    def get_subgroups(self, semigroup):
+        """Template to get the subgroups of the semigroup
+
+        Keyword arguments:
+            semigroup -- TransformationSemigroup object
+        """
+        # File names
+        template_file = "subgroups.txt"
+        filename = "gap_scripts/get_subgroups.g"
+
+        # Generate_ script
+        self.generate_script(semigroup, template_file, filename)
+        # Execute as bash script
+        self.execute_script(filename)
+
+        # Save DOT as image
+        save_dot_as_img("d_classes_with_group_h_classes.dot")
   

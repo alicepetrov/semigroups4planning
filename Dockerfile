@@ -52,5 +52,8 @@ RUN yes | pip3 install -e .
 RUN export PYTHONIOENCODING=utf8
 
 COPY . /SEMIGROUPS4PLANNING
+WORKDIR /SEMIGROUPS4PLANNING
+
+RUN yes | pip3 install .
 
 CMD planutils activate

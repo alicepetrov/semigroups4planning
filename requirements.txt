@@ -1,0 +1,7 @@
+macq
+numpy
+networkx
+jinja2
+pydot
+requests
+tarski

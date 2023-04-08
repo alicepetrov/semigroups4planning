@@ -1,6 +1,7 @@
 LogTo("greens_relations.log");
 
 LoadPackage("semigroups");
+LoadPackage("sgpviz");
 
 {% include 'functions/transformation_semigroup.txt' %}
 
@@ -14,4 +15,6 @@ LoadPackage("semigroups");
 
 {% include 'functions/length_longest_d_chain.txt' %}
 
-PrintTo( "dot_for_drawing_d_classes.dot", DotForDrawingDClasses( transformation_semigroup ) );
+PrintTo( "dot_for_drawing_d_classes.dot", DotForDrawingDClasses( S ) );
+
+quit;

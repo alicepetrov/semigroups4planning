@@ -1,1 +1,1 @@
-digraph_actions_on_points := DigraphOfActionOnPoints( transformation_semigroup );
+digraph_actions_on_points := DigraphOfActionOnPoints( S );

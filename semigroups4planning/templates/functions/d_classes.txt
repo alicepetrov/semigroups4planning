@@ -1,1 +1,1 @@
-d_classes := GreensDClasses( transformation_semigroup );
+d_classes := GreensDClasses( S );

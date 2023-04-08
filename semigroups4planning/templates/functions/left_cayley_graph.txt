@@ -1,1 +1,1 @@
-left_cayley_graph := LeftCayleyDigraph( transformation_semigroup );
+left_cayley_graph := LeftCayleyDigraph( S );
