@@ -1,0 +1,9 @@
+LogTo("get_size.log");
+
+LoadPackage("semigroups");
+
+{% include 'functions/transformation_semigroup.txt' %}
+
+{% include 'functions/size.txt' %}
+
+quit;

@@ -1,0 +1,17 @@
+LogTo("basic_attributes.log");
+
+LoadPackage("Digraph");
+LoadPackage("semigroups");
+LoadPackage("sgpviz");
+
+{% include 'functions/transformation_semigroup.txt' %}
+
+{% include 'functions/generators.txt' %}
+
+{% include 'functions/digraph_actions_on_points.txt' %}
+
+PrintTo( "dot_drawing_actions_on_points.dot", DotDigraph( digraph_actions_on_points ) );
+
+PrintTo( "dot_for_drawing_d_classes.dot", DotForDrawingDClasses( S ) );
+
+quit;

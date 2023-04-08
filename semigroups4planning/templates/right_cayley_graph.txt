@@ -1,0 +1,17 @@
+LogTo("right_cayley_graph.log");
+
+LoadPackage("semigroups");
+LoadPackage("sgpviz");
+LoadPackage("automata");
+
+{% include 'functions/transformation_semigroup.txt' %}
+
+{% include 'functions/right_cayley_graph.txt' %}
+
+PrintTo( "dot_drawing_right_cayley_graph.dot", DotForDrawingRightCayleyGraph( S ) );
+
+aut := RightCayleyGraphAsAutomaton(S);
+
+PrintTo( "dot_drawing_right_cayley_automaton.dot", DotStringForDrawingSCCAutomaton( aut ) );
+
+quit;
