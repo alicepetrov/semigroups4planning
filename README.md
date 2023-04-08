@@ -5,6 +5,8 @@ For best results, run from the provided Docker container.
 
 ## Installation
 
+(Not required if running Docker container)
+
 Navigate to root directory and run:
 
 > pip install -r requirements.txt
@@ -20,6 +22,10 @@ Usage:
 The <function_to_run> argument can be one of the following:
 
 {get_basic_attributes, get_size, get_greens_relations, get_right_cayley_graph, get_subgroups}
+
+For example, try running ...
+
+> python3 -m semigroups4planning --domain_file examples/hanoi/domain.pddl --problem_file examples/hanoi/problem.pddl get_basic_attributes
 
 options:
 
