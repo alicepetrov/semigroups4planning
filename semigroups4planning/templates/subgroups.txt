@@ -1,0 +1,13 @@
+LogTo("subgroups.log");
+
+LoadPackage("semigroups");
+
+{% include 'functions/transformation_semigroup.txt' %}
+
+D := Filtered(DClasses( S ), IsRegularDClass);
+
+List(D, X -> StructureDescription(GroupHClass(X)));
+
+PrintTo( "d_classes_with_group_h_classes.dot", DotString( S ) );
+
+quit;
