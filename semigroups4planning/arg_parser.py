@@ -126,7 +126,7 @@ class S4PParser(object):
             )
 
 
-    def error(self): # TODO
+    def error(self):
         print("Semigroups4Planning v" + __version__)
         self._parser.print_help()
         sys.exit(0)

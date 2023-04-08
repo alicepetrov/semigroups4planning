@@ -17,11 +17,11 @@ class TransformationSemigroup():
         self._generators_as_string = [np.array2string(v, separator=', ', max_line_width=sys.maxsize) for v in self._generators]
 
 
-    def get_transformation_kernel(): # TODO
+    def get_transformation_kernel(): # TODO: Next version
         pass
 
-    def get_transformation_image(): # TODO
+    def get_transformation_image(): # TODO: Next version
         pass
 
-    def get_transformation_rank(): # TODO
+    def get_transformation_rank(): # TODO: Next version
         pass
